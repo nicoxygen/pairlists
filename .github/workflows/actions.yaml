@@ -1,4 +1,4 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Simple workflow for deploying static content to Pages
 name: Deploy static content to Pages
 
 on:
@@ -24,7 +24,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-
   deploy:
     environment:
       name: github-pages
@@ -32,37 +31,44 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-
+    # Checkout repository to get access to files (including docker-compose.yml)
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    # Set up Docker
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2
 
+    # Install Docker Compose
     - name: Set up Docker Compose
       run: |
         sudo apt-get update
         sudo apt-get install -y docker-compose
 
+    # Build Docker Compose images
     - name: Build Docker Compose images
       run: |
         docker-compose -f ./docker-compose.yml build
 
+    # Run Docker Compose
     - name: Run Docker Compose
       run: |
         docker-compose -f ./docker-compose.yml up -d freqtrade-pairlist
         sleep 10  # Attend que le service se lance
         docker-compose -f ./docker-compose.yml down  # Arrête le service après l'exécution
-        
-    - name: Checkout
-      uses: actions/checkout@v4
-      
+
+    # Setup Pages
     - name: Setup Pages
       uses: actions/configure-pages@v5
-      
+
+    # Upload artifact for Pages
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        # Upload entire repository
-        path: '.'
-        
+        path: './'  # Upload entire repository
+
+    # Deploy to GitHub Pages
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
+
