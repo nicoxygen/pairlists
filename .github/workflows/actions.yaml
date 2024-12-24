@@ -65,7 +65,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './freqtrade/data/hyperliquid'  # Upload entire repository
+        path: './freqtrade/user_data/data/hyperliquid'  # Upload entire repository
 
     # Deploy to GitHub Pages
     - name: Deploy to GitHub Pages
