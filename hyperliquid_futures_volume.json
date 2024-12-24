@@ -1,8 +1,8 @@
 {
     "exchange": {
         "name": "hyperliquid",
-        "key": "1",
-        "secret": "2",
+        "key": "${{ secrets.KEY }}",
+        "secret": "${{ secrets.SECRET }}",
         "ccxt_config": {"enableRateLimit": true},
         "ccxt_async_config": {
             "enableRateLimit": true,
