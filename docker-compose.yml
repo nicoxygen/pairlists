@@ -8,4 +8,4 @@ services:
     volumes:
       - "/freqtrade/user_data:/freqtrade/user_data"
     entrypoint: >
-      /bin/bash -c "freqtrade list-pairs --config /freqtrade/hyperliquid_futures_volume.json --quote USDC --print-json > /freqtrade/data/hyperliquid/pairlist.json"
+      /bin/bash -c "freqtrade list-pairs --config /freqtrade/user_data/hyperliquid_futures_volume.json --quote USDC --print-json > /freqtrade/user_data/data/hyperliquid/pairlist.json"
