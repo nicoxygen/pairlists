@@ -1,0 +1,32 @@
+name: Run Freqtrade Pairlist
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Exécution toutes les 30 minutes
+  workflow_dispatch:  # Permet d'exécuter manuellement le workflow
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
+
+    - name: Set up Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
+
+    - name: Build Docker Compose images
+      run: |
+        docker-compose -f docker-compose.yml build
+
+    - name: Run Docker Compose
+      run: |
+        docker-compose -f docker-compose.yml up -d freqtrade-pairlist
+        sleep 10  # Attend que le service se lance
+        docker-compose -f docker-compose.yml down  # Arrête le service après l'exécution
