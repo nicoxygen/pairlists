@@ -6,6 +6,6 @@ services:
     container_name: freqtrade_pairlist
     restart: "no"
     volumes:
-      - "/zfspool/Appdata/freqtradeio/user_data:/freqtrade/user_data"
+      - "freqtrade/user_data:/freqtrade/user_data"
     entrypoint: >
       /bin/bash -c "freqtrade list-pairs --config /freqtrade/hyperliquid_futures_volume.json --quote USDC --print-json > /freqtrade/data/hyperliquid/pairlist.json"
