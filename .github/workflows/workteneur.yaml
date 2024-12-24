@@ -23,11 +23,11 @@ jobs:
         # Créer un répertoire temporaire pour les données
         mkdir -p ./user_data/data/hyperliquid
         
-        # Lancer le conteneur avec un volume local monté
+        # Lancer le conteneur avec une commande shell pour générer le fichier JSON
         docker run --rm \
           -v "${{ github.workspace }}/user_data:/freqtrade/user_data" \
           freqtradeorg/freqtrade:stable \
-          /bin/bash -c "mkdir -p /freqtrade/user_data/data/hyperliquid && freqtrade list-pairs --config ./hyperliquid_futures_volume.json --quote USDC --print-json > /freqtrade/user_data/data/hyperliquid/pairlist.json"
+          /bin/bash -c "mkdir -p /freqtrade/user_data/data/hyperliquid && freqtrade list-pairs --config /freqtrade/user_data/hyperliquid_futures_volume.json --quote USDC --print-json > /freqtrade/user_data/data/hyperliquid/pairlist.json"
 
     - name: Check if JSON was generated
       run: |
@@ -41,3 +41,4 @@ jobs:
     - name: Display JSON output
       run: |
         cat ./user_data/data/hyperliquid/pairlist.json
+
