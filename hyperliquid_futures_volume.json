@@ -1,0 +1,25 @@
+{
+    "exchange": {
+        "name": "hyperliquid",
+        "key": "1",
+        "secret": "2",
+        "ccxt_config": {"enableRateLimit": true},
+        "ccxt_async_config": {
+            "enableRateLimit": true,
+            "rateLimit": 200
+        },
+        "pair_whitelist": [
+          ],
+        "pair_blacklist": [
+        ]
+    },
+    "pairlists": [
+        {
+            "method": "VolumePairList",
+            "number_assets": 40,
+            "sort_key": "quoteVolume",
+            "min_value": 500000,
+            "refresh_period": 1800
+        }
+    ]
+}
