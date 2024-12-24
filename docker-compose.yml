@@ -8,4 +8,4 @@ services:
     volumes:
       - "/zfspool/Appdata/freqtradeio/user_data:/freqtrade/user_data"
     entrypoint: >
-      /bin/bash -c "freqtrade list-pairs --config /freqtrade/user_data/extase_bot_1_momentum_l2.json --quote USDC --print-json > /freqtrade/user_data/data/hyperliquid/pairlist.json"
+      /bin/bash -c "freqtrade list-pairs --config /freqtrade/extase_bot_1_momentum_l2.json --quote USDC --print-json > /freqtrade/data/hyperliquid/pairlist.json"
